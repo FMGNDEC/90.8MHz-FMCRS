@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded",
         var refixing_navbar = function(){
             var home=document.querySelector("#home");
             home.style.height="48vw";
-            home.style.background="url(../assets/img/home_bg.png) no-repeat";
+            home.style.background="url(assets/img/home_bg.png) no-repeat";
             home.style["background-size"] ="cover";
             home.style["background-color"] ="rgba(19, 28, 33, 0.99)";
             home.style["background-attachment"] ="local";
