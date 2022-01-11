@@ -1,0 +1,367 @@
+document.addEventListener("DOMContentLoaded",
+    function (){
+        var cellCount = 3;
+        var selectedIndex = 2;
+        var slideIndi=[1,9,1];
+        var indicators;
+        var event_link;
+        var home_link;
+        var about_link;
+        var contact_link;
+        var program_link;
+        var live_past="live";
+        function carousel_rotate(PrevNext){
+            if (PrevNext==="next"){
+                var nextCell = document.querySelector('.carousel-cell:nth-child('+selectedIndex+')');
+                var currCell = document.querySelector('.carousel-cell:nth-child('+(selectedIndex-1)+')');
+                nextCell.style.transform = "rotateY(0deg) translateZ(56vw) translateX(0)"; 
+                currCell.style.transform = "rotateY(20deg) translateZ(26vw) translateX(-50vw)";
+
+                slideIndi[selectedIndex-1]=9;
+                slideIndi[selectedIndex-2]=1;
+                indicators.style["grid-template-columns"] = slideIndi[0]+'fr '+slideIndi[1]+'fr '+slideIndi[2]+'fr';
+            }
+            if (PrevNext==="prev"){
+                var prevCell = document.querySelector('.carousel-cell:nth-child('+selectedIndex+')');
+                var currCell = document.querySelector('.carousel-cell:nth-child('+(selectedIndex+1)+')');
+                prevCell.style.transform = "rotateY(0deg) translateZ(56vw) translateX(0)"; 
+                currCell.style.transform = "rotateY(-20deg) translateZ(26vw) translateX(50vw)";
+
+                slideIndi[selectedIndex-1]=9;
+                slideIndi[selectedIndex]=1;
+                indicators.style["grid-template-columns"] = slideIndi[0]+'fr '+slideIndi[1]+'fr '+slideIndi[2]+'fr';
+            }
+        }
+
+        var fixing_navbar = function(){
+            var home=document.querySelector("#home");
+            home.style.height="auto";
+            home.style["background-image"] ="none";
+            home.style.background="rgba(19, 28, 33, 0.99)";
+        }
+        var refixing_navbar = function(){
+            var home=document.querySelector("#home");
+            home.style.height="48vw";
+            home.style.background="url(../assets/img/home_bg.png) no-repeat";
+            home.style["background-size"] ="cover";
+            home.style["background-color"] ="rgba(19, 28, 33, 0.99)";
+            home.style["background-attachment"] ="local";
+        }
+        // Convenience function for inserting innerHTML for 'select'
+        var insertHtml = function (selector, html) {
+            var targetElem = document.querySelector(selector);
+            targetElem.innerHTML = html;
+        };
+        var insertProperty = function (string, propName, propValue) {
+            var propToReplace = "{{" + propName + "}}";
+            string = string.replace(new RegExp(propToReplace, "g"), propValue);
+            return string;
+        };
+        var event_registration = function (){
+            var selectedEventName = this.id;
+            $ajaxUtils.sendGetRequest("../data/events.json",
+                function(resJson){
+                    var selectedEventDetails;
+                    for (var i=0; i<resJson.length; i++){
+                        if (resJson[i].eventName===selectedEventName){
+                            selectedEventDetails=resJson[i];
+                            break;
+                        }
+                    }
+                    console.log(selectedEventDetails);
+                    $ajaxUtils.sendGetRequest("snippets/snippet_event_registration.html",
+                        function(res){
+                            var final_html=res;
+                            for (bit in selectedEventDetails){
+                                final_html = insertProperty(final_html,bit,selectedEventDetails[bit]);
+                            }
+                            insertHtml("#event-registration-adder",final_html);
+                            document.querySelector("#event-registration-back-logo").addEventListener("click",eventsDisplay);
+                            document.querySelector("#event-registration-back-button").addEventListener("click",eventsDisplay);
+                        },
+                    false);
+                }
+            );
+        }
+
+        var event_glimpses = function(){
+            var selectedEventName = this.id;
+            $ajaxUtils.sendGetRequest("snippets/snippet_event_glimpses.html",
+                function(res){
+                    res = insertProperty(res,"eventName",selectedEventName);
+                    insertHtml("#event-registration-adder",res);
+
+                    document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
+                    document.querySelector("#glimpses-back-logo").addEventListener("click",eventsDisplay);
+                    document.querySelector("#glimpses-back-button").addEventListener("click",eventsDisplay);
+                },
+            false);
+        };
+
+        var events_lister = function(whichButton){
+            var live_button=document.querySelector("#live-past_events #live-events");
+            var past_button=document.querySelector("#live-past_events #past-events");
+            if (whichButton==="live-events"){
+                live_past="live";
+                live_button.style["background"]="#F7DE60";
+                live_button.style["color"]="rgba(51, 51, 51, 1)";
+                
+                past_button.style["background"]="#12191D";
+                past_button.style["color"]="rgba(255, 255, 255, 0.5)";
+            }
+            else if (whichButton==="past-events"){
+                live_past="past";
+                past_button.style["background"]="#F7DE60";
+                past_button.style["color"]="rgba(51, 51, 51, 1)";
+                
+                live_button.style["background"]="#12191D";
+                live_button.style["color"]="rgba(255, 255, 255, 0.5)";
+            }
+            $ajaxUtils.sendGetRequest("../data/events.json",
+                function(resJson){
+                    var final_html="";
+                    $ajaxUtils.sendGetRequest("snippets/snippet_event_display.html",
+                        function(event_temp){
+                            for (var i=0; i<resJson.length; i++){
+                                console.log(resJson[i].date_time);
+                                if (resJson[i].eventName.toLowerCase().indexOf(document.querySelector("#search-bar #search-input").value.toLowerCase()) !== -1){
+                                    var event_date = new Date(resJson[i].date+", "+resJson[i].time);
+                                    var curr_date = new Date();
+                                    if (live_past==="live" && event_date>=curr_date){
+                                        final_html+=insertProperty(event_temp,"eventName",resJson[i].eventName);
+                                    }
+                                    else if (live_past==="past" && event_date<curr_date){
+                                        final_html+=insertProperty(event_temp,"eventName",resJson[i].eventName);
+                                    }
+                                }                            
+                            }
+                            insertHtml("#events-view #events",final_html);
+                            
+                            var event_list=document.querySelectorAll("#events div img");
+                            if (event_list.length==0){
+                                document.querySelector("#events-view #events").style.display="block";
+                                insertHtml("#events-view #events","<div id='no-events-found'>No events found</div>");
+                            }
+                            else{
+                                document.querySelector("#events-view #events").style.display="grid";
+                                if (live_past==="live"){
+                                    for (var j=0; j<event_list.length; j++){
+                                        event_list[j].addEventListener("click",event_registration);
+                                    }
+                                }
+                                else if (live_past==="past"){
+                                    for (var j=0; j<event_list.length; j++){
+                                        event_list[j].addEventListener("click",event_glimpses);
+                                    }
+                                }
+                            }
+                            
+                        },
+                    false);                                                      
+                }
+        )}
+
+        function liveHandler(){
+            document.querySelector("#live-past_events #live-events").setAttribute("changeOnHover","0");
+            events_lister("live-events");
+            document.querySelector("#live-past_events #past-events").setAttribute("changeOnHover","1");
+        }
+        function pastHandler(){
+            document.querySelector("#live-past_events #past-events").setAttribute("changeOnHover","0");
+            events_lister("past-events");
+            document.querySelector("#live-past_events #live-events").setAttribute("changeOnHover","1");
+        }
+
+        var eventsDisplay = function(){
+            console.log("Listened");
+            $ajaxUtils.sendGetRequest("snippets/snippet_events.html",
+                function(res1){
+                    insertHtml("#snippet-adder",res1);
+                    define_buttons();
+                    fixing_navbar();
+                    defining_links();
+                    logo_link();
+                    event_link.style.color="rgba(247, 222, 96, 1)";
+                    event_link.style["text-decoration-line"]="underline";
+                    event_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
+                    event_link.style["text-underline-offset"]="0.8vw";
+                    document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
+                    document.querySelector("#search-bar #search-input").addEventListener("input",events_lister);
+                    document.querySelector("#live-past_events #live-events").addEventListener("click",liveHandler);
+                    document.querySelector("#live-past_events #past-events").addEventListener("click",pastHandler);
+                    if (live_past==="live"){
+                        liveHandler();
+                    }
+                    else pastHandler();
+                    events_lister();
+                    define_footer_links();
+                },
+            false);
+        }
+        var homeDisplay = function(){
+            $ajaxUtils.sendGetRequest("snippets/snippet_home.html",
+                function(res){
+                    insertHtml("#snippet-adder",res);
+                    define_buttons(true);
+                    refixing_navbar();
+                    defining_links();
+                    logo_link();
+                    home_link.style.color="rgba(247, 222, 96, 1)";
+                    home_link.style["text-decoration-line"]="underline";
+                    home_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
+                    home_link.style["text-underline-offset"]="0.8vw";
+                    document.querySelector("body").style.background="white";
+                    undefine_footer_links();
+                },
+            false);
+        }
+
+        var logo_link = function(){
+            document.querySelector("#home #logo").addEventListener("click",homeDisplay);
+        }
+        logo_link();
+
+        var contactDisplay = function(){
+            $ajaxUtils.sendGetRequest("snippets/snippet_contact.html",
+                function(res){
+                    insertHtml("#snippet-adder",res);
+                    fixing_navbar();
+                    defining_links();
+                    logo_link();
+                    contact_link.style.color="rgba(247, 222, 96, 1)";
+                    contact_link.style["text-decoration-line"]="underline";
+                    contact_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
+                    contact_link.style["text-underline-offset"]="0.8vw";
+
+                    document.querySelector("#contact-us").style.background="rgba(19, 28, 33, 0.99)";
+                    document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
+                    var contactSubheading = document.querySelector("#contact-us h3");
+                    contactSubheading.style.color = "white";
+
+                    define_footer_links();
+                },
+            false);
+        }
+
+        var aboutDisplay = function(){
+            $ajaxUtils.sendGetRequest("snippets/snippet_about.html",
+                function(res){
+                    insertHtml("#snippet-adder",res);
+                    fixing_navbar();
+                    defining_links();
+                    logo_link();
+                    about_link.style.color="rgba(247, 222, 96, 1)";
+                    about_link.style["text-decoration-line"]="underline";
+                    about_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
+                    about_link.style["text-underline-offset"]="0.8vw";
+
+                    document.querySelector("div#main-2-text h3").style.color="white";
+                    document.querySelector("div#main-2-text p").style.color="white";
+                    document.querySelector("div#main-2").style.background="rgba(19, 28, 33, 0.99)";
+
+                    define_footer_links();
+                },
+            false);
+        }
+
+        var programDisplay = function(){
+            $ajaxUtils.sendGetRequest("snippets/snippet_programs.html",
+                function(res){
+                    insertHtml("#snippet-adder",res);
+                    fixing_navbar();
+                    defining_links();
+                    logo_link();
+                    program_link.style.color="rgba(247, 222, 96, 1)";
+                    program_link.style["text-decoration-line"]="underline";
+                    program_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
+                    program_link.style["text-underline-offset"]="0.8vw";
+                    document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
+
+                    $ajaxUtils.sendGetRequest("../data/programs.json",
+                        function(resJson){
+                            $ajaxUtils.sendGetRequest("../snippets/snippet_program.html",
+                                function(res2){
+                                    var final_html='';
+                                    for (var i=0; i<resJson.length; i++){
+                                        var perTemplate = res2;
+                                        for (j in resJson[i]){
+                                            perTemplate = insertProperty(perTemplate,j,resJson[i][j]);
+                                        }
+                                        final_html+=perTemplate;
+                                    }
+                                    insertHtml("#programs #programs-content",final_html);
+                                },
+                            false);
+                            
+                        }
+                    );
+                    define_footer_links();
+                },
+            false);
+        }
+
+
+        function defining_links(){
+            console.log("Links Defined");
+            event_link = document.querySelector("#evn-link");
+            event_link.addEventListener('click', eventsDisplay);
+
+            home_link = document.querySelector("#hom-link");
+            home_link.addEventListener('click', homeDisplay);
+
+            about_link = document.querySelector("#abt-link");
+            about_link.addEventListener("click",aboutDisplay);
+
+            contact_link = document.querySelector("#con-link");
+            contact_link.addEventListener("click",contactDisplay);
+
+            program_link = document.querySelector("#prg-link");
+            program_link.addEventListener("click",programDisplay);
+        }
+        defining_links();
+
+
+        function define_buttons(viewAllPresent){
+            indicators=document.querySelector("div.indicators");
+            var prevButton = document.querySelector('.bi-chevron-compact-left');
+            prevButton.addEventListener('click', function() {
+                selectedIndex--;
+                if (selectedIndex<1){
+                    selectedIndex=1;
+                }
+                console.log(selectedIndex);
+                carousel_rotate("prev");
+            });
+
+            var nextButton = document.querySelector('.bi-chevron-compact-right');
+            nextButton.addEventListener('click', function() {
+                selectedIndex++;
+                if (selectedIndex>cellCount){
+                    selectedIndex=3;
+                }
+                console.log(selectedIndex);
+                carousel_rotate("next");
+            });
+            if (viewAllPresent){
+                var viewAllButton = document.querySelector("#events-view #view-all");
+                console.log(viewAllButton);
+                viewAllButton.addEventListener("click",eventsDisplay);
+            }
+        }
+        define_buttons(true);
+
+        var define_footer_links = function(){
+            document.querySelector("#f-hom-link").addEventListener("click",homeDisplay);
+            document.querySelector("#f-abt-link").addEventListener("click",aboutDisplay);
+            document.querySelector("#f-evn-link").addEventListener("click",eventsDisplay);
+            document.querySelector("#f-con-link").addEventListener("click",contactDisplay);
+        }
+        var undefine_footer_links = function(){
+            document.querySelector("#f-hom-link").removeEventListener("click",homeDisplay);
+            document.querySelector("#f-abt-link").removeEventListener("click",aboutDisplay);
+            document.querySelector("#f-evn-link").removeEventListener("click",eventsDisplay);
+            document.querySelector("#f-con-link").removeEventListener("click",contactDisplay);
+        }
+        
+    }
+);
