@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded",
                 live_button.style["background"]="#12191D";
                 live_button.style["color"]="rgba(255, 255, 255, 0.5)";
             }
-            $ajaxUtils.sendGetRequest("../data/events.json",
+            $ajaxUtils.sendGetRequest("data/events.json",
                 function(resJson){
                     var final_html="";
                     $ajaxUtils.sendGetRequest("snippets/snippet_event_display.html",
