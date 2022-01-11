@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded",
         var refixing_navbar = function(){
             var home=document.querySelector("#home");
             home.style.height="48vw";
-            home.style.background="url(../assets/img/home_bg.png) no-repeat";
+            home.style.background="url(assets/img/home_bg.png) no-repeat";
             home.style["background-size"] ="cover";
             home.style["background-color"] ="rgba(19, 28, 33, 0.99)";
             home.style["background-attachment"] ="local";
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded",
         };
         var event_registration = function (){
             var selectedEventName = this.id;
-            $ajaxUtils.sendGetRequest("../data/events.json",
+            $ajaxUtils.sendGetRequest("data/events.json",
                 function(resJson){
                     var selectedEventDetails;
                     for (var i=0; i<resJson.length; i++){
@@ -277,9 +277,9 @@ document.addEventListener("DOMContentLoaded",
                     program_link.style["text-underline-offset"]="0.8vw";
                     document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
 
-                    $ajaxUtils.sendGetRequest("../data/programs.json",
+                    $ajaxUtils.sendGetRequest("data/programs.json",
                         function(resJson){
-                            $ajaxUtils.sendGetRequest("../snippets/snippet_program.html",
+                            $ajaxUtils.sendGetRequest("snippets/snippet_program.html",
                                 function(res2){
                                     var final_html='';
                                     for (var i=0; i<resJson.length; i++){
