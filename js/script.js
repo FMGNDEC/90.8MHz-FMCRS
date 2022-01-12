@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded",
                     about_link.style["text-decoration-line"]="underline";
                     about_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
                     about_link.style["text-underline-offset"]="0.8vw";
-
+                    document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
                     document.querySelector("div#main-2-text h3").style.color="white";
                     document.querySelector("div#main-2-text p").style.color="white";
                     document.querySelector("div#main-2").style.background="rgba(19, 28, 33, 0.99)";
