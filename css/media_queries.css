@@ -1,0 +1,234 @@
+@media screen and (max-width:1199px) and (min-width:768px){
+    #contact-us #details{
+        grid-template-columns: 1fr 1fr;
+    }
+    #contact-us #call{
+        right: 6vw;
+        bottom: 5vw;
+        width: 32vw;
+    }
+    #contact-us #music{
+        right: 25vw;
+        bottom: 25vw;
+        width: 12vw;
+    }
+    #programs #programs-content .program{
+        height: auto;
+    }
+    #programs #programs-content .program .program-pic{
+        height: 24vw;
+        width: 45%;
+    }
+    #programs #programs-content .program:nth-child(odd) .description{
+        float: none;
+        width: 100%;
+    }
+    #programs #programs-content .program:nth-child(even) .description{
+        float: none;
+        width: 100%;
+    }
+    #programs #programs-content .program:nth-child(even) .program-pic{
+        margin: 0vw 0vw 1.5vw 2vw;
+    }
+    #programs #programs-content .program:nth-child(odd) .program-pic{
+        margin: 0vw 2vw 1.5vw 0vw;
+    }
+    #programs #programs-content .program .description .content{
+        overflow: visible;
+        margin-bottom: 0;
+    }
+    #programs #programs-content .program .program-name{
+        margin-bottom: 1rem;
+    }
+    #events-view #events{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media screen and (max-width:991px) {
+    #main-2-pics{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+    }
+    #main-2-pics #p1,#main-2-pics #p2{
+        position: initial;
+        width: 100%;
+    }
+    #main-2-pics #p3{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        height: 100%;
+        width: 50%;
+    }
+    #events-view .heading{
+        padding-top: 3.5rem;
+    }
+    .carousel{
+        transform: translateZ(-40vw);
+    }
+    .scene{
+        margin-top: 20vw;
+        margin-bottom: 15vw;
+    }
+    div#indicators-container{
+        bottom: -12vw;
+    }
+    #events-view button#view-all{
+        margin-top: 10vw;
+        margin-bottom: 8vw;
+    }
+    img.movers{
+        height: 20%;
+        width: 10%;
+        top: 40%;
+    }
+    #contact-us h2{
+        padding-top: 2.5rem;
+    }
+    footer{
+        grid-template-columns: 1fr 0.4fr
+    }
+    #programs h3{
+        font-size: 2rem;
+        padding: 0vw 5vw 2.2vw 5vw;
+    }
+    /* Events Section */
+    #events-view #live-past-search{
+        grid-template-columns: 1fr;
+        grid-gap:1rem;
+    }
+    #events-view #live-past-search #live-past_events #live-events, #events-view #live-past-search #live-past_events #past-events{
+        width: 48%;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        font-size: 1rem;
+        line-height: 2rem;
+    }
+    #events-view #live-past-search #search-bar #search-input{
+        padding: 1rem 0vw 1rem 5vw;
+    }
+    /* Event Registration Form */
+    #event-registration-form{
+        grid-template-columns: 1fr;
+    }
+    #event-registration-form #event-details div img{
+        height: auto;
+    }
+    hr#btw-event-participant{
+        border: 0;
+    }
+    #event-registration-form #participant-details div p{
+        line-height: 2rem;
+    }
+    #event-registration-form #participant-details div input{
+        width: 100%;
+        padding: 1rem;
+        padding-left: 8vw;
+        padding-right: 8vw;
+        margin-bottom: 1rem;
+        
+    }
+    #event-registration-form #participant-details div button{
+        padding: 1rem;
+        padding-left: 8vw;
+        padding-right: 8vw;
+    }
+    /* Event Glimpses */
+    #glimpses h2{
+        padding: 1.5rem 8vw 0.8vw 8vw;
+    }
+
+}
+@media screen and (max-width:767px) {
+    div#home[homeornot="home"]{
+        min-height: 100vh;
+    }
+    div#main-2{
+        min-height: 100vh;
+    }
+    div#main-2-text p{
+        padding-left: 10vw;
+        padding-right: 10vw;
+        font-size: 1.5rem;
+        line-height: 2.2rem;
+    }
+    div#events-view{
+        min-height: 100vh;
+    }
+    #contact-us #details{
+        grid-template-columns: repeat(1,1fr);
+    }
+    #open-hours,#address{
+        width: 90vw;
+    }
+    #support{
+        width: 55vw;
+    }
+    div#contact-us{
+        min-height: 100vh;
+    }
+
+    /* Footer */
+    footer{
+        grid-template-columns: 1fr;
+    }
+    footer .social-media .logo img{
+        float: left;
+        margin-right: 2vw;
+    }
+    footer .member-form input{
+        height: 3.5rem;
+        padding-left: 2rem;
+    }
+    footer .member-form button{
+        height: 3.5rem;
+        padding-left: 2rem;
+    }
+
+    /* Program */
+    #programs #programs-content{
+        height: auto;
+    }
+    #programs #programs-content .program{
+        height: auto;
+    }
+    #programs #programs-content .program .program-pic{
+        width: 100%;
+        height: auto;
+        float: none;
+    }
+    #programs #programs-content .program .description{
+        width: 100%;
+        max-height: 90vw;
+        float: none;
+        padding: 5vw;
+    }
+    #programs #programs-content .program .program-name{
+        height: auto;
+        margin-bottom: 1rem;
+    }
+    #programs #programs-content .program .description .content{
+        max-height: 70vw;
+        margin-bottom: 0;
+        overflow: auto;
+    }
+    #programs #programs-content .program:nth-child(odd) .description{
+        float: none;
+    }
+    #programs #programs-content .program:nth-child(even) .description{
+        float: none;
+    }
+    #programs #programs-content .program:nth-child(even) .program-pic{
+        float: none;
+    }
+    #programs #programs-content .program:nth-child(odd) .program-pic{
+        float: none;
+    }
+    #events-view #events{
+        grid-template-columns: repeat(2,1fr);
+    }
+    #events-view #events div p{
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+    }
+}

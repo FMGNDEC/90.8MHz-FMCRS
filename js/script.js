@@ -35,15 +35,16 @@ document.addEventListener("DOMContentLoaded",
 
         var fixing_navbar = function(){
             var home=document.querySelector("#home");
-            home.style.height="auto";
+            home.setAttribute("homeornot","not");
             home.style["background-image"] ="none";
             home.style.background="rgba(19, 28, 33, 0.99)";
         }
         var refixing_navbar = function(){
             var home=document.querySelector("#home");
-            home.style.height="48vw";
+            home.setAttribute("homeornot","home");
             home.style.background="url(assets/img/home_bg.png) no-repeat";
             home.style["background-size"] ="cover";
+            home.style["background-position"] ="center";
             home.style["background-color"] ="rgba(19, 28, 33, 0.99)";
             home.style["background-attachment"] ="local";
         }
@@ -184,7 +185,7 @@ document.addEventListener("DOMContentLoaded",
                     event_link.style.color="rgba(247, 222, 96, 1)";
                     event_link.style["text-decoration-line"]="underline";
                     event_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
-                    event_link.style["text-underline-offset"]="0.8vw";
+                    event_link.style["text-underline-offset"]="0.8rem";
                     document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
                     document.querySelector("#search-bar #search-input").addEventListener("input",events_lister);
                     document.querySelector("#live-past_events #live-events").addEventListener("click",liveHandler);
@@ -209,7 +210,7 @@ document.addEventListener("DOMContentLoaded",
                     home_link.style.color="rgba(247, 222, 96, 1)";
                     home_link.style["text-decoration-line"]="underline";
                     home_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
-                    home_link.style["text-underline-offset"]="0.8vw";
+                    home_link.style["text-underline-offset"]="0.8rem";
                     document.querySelector("body").style.background="white";
                     undefine_footer_links();
                 },
@@ -217,7 +218,7 @@ document.addEventListener("DOMContentLoaded",
         }
 
         var logo_link = function(){
-            document.querySelector("#home #logo").addEventListener("click",homeDisplay);
+            document.querySelector("#home .navbar-brand img").addEventListener("click",homeDisplay);
         }
         logo_link();
 
@@ -231,9 +232,10 @@ document.addEventListener("DOMContentLoaded",
                     contact_link.style.color="rgba(247, 222, 96, 1)";
                     contact_link.style["text-decoration-line"]="underline";
                     contact_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
-                    contact_link.style["text-underline-offset"]="0.8vw";
+                    contact_link.style["text-underline-offset"]="0.8rem";
 
                     document.querySelector("#contact-us").style.background="rgba(19, 28, 33, 0.99)";
+                    document.querySelector("#contact-us hr").style.color="white";
                     document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
                     var contactSubheading = document.querySelector("#contact-us h3");
                     contactSubheading.style.color = "white";
@@ -253,8 +255,9 @@ document.addEventListener("DOMContentLoaded",
                     about_link.style.color="rgba(247, 222, 96, 1)";
                     about_link.style["text-decoration-line"]="underline";
                     about_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
-                    about_link.style["text-underline-offset"]="0.8vw";
+                    about_link.style["text-underline-offset"]="0.8rem";
                     document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
+                    document.querySelector("#under-aboutus").style.color="white";
                     document.querySelector("div#main-2-text h3").style.color="white";
                     document.querySelector("div#main-2-text p").style.color="white";
                     document.querySelector("div#main-2").style.background="rgba(19, 28, 33, 0.99)";
@@ -274,7 +277,7 @@ document.addEventListener("DOMContentLoaded",
                     program_link.style.color="rgba(247, 222, 96, 1)";
                     program_link.style["text-decoration-line"]="underline";
                     program_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
-                    program_link.style["text-underline-offset"]="0.8vw";
+                    program_link.style["text-underline-offset"]="0.8rem";
                     document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
 
                     $ajaxUtils.sendGetRequest("data/programs.json",
@@ -355,12 +358,14 @@ document.addEventListener("DOMContentLoaded",
             document.querySelector("#f-abt-link").addEventListener("click",aboutDisplay);
             document.querySelector("#f-evn-link").addEventListener("click",eventsDisplay);
             document.querySelector("#f-con-link").addEventListener("click",contactDisplay);
+            document.querySelector("#f-prg-link").addEventListener("click",programDisplay);
         }
         var undefine_footer_links = function(){
             document.querySelector("#f-hom-link").removeEventListener("click",homeDisplay);
             document.querySelector("#f-abt-link").removeEventListener("click",aboutDisplay);
             document.querySelector("#f-evn-link").removeEventListener("click",eventsDisplay);
             document.querySelector("#f-con-link").removeEventListener("click",contactDisplay);
+            document.querySelector("#f-prg-link").removeEventListener("click",programDisplay);
         }
         
     }

@@ -1,12 +1,29 @@
 <div id="home">
-    <nav>
-        <div><a href="#home"><div id="logo"></div></a></div>
-        <div id="tabs">
-            <div><a class="tab" id="hom-link" href="#">Home</a></div>
-            <div><a class="tab" id="abt-link" href="#">About</a></div>
-            <div><a class="tab" id="prg-link" href="#">Programs</a></div>
-            <div><a class="tab" id="evn-link" href="#">Events</a></div>
-            <div><a class="tab" id="con-link" href="#">Contact</a></div>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid px-0">
+          <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt=""></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+            <ul class="navbar-nav text-center align-middle">
+              <li class="nav-item">
+                <a id="hom-link" class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a id="abt-link" class="nav-link active" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a id="prg-link" class="nav-link active" href="#">Programs</a>
+              </li>
+              <li class="nav-item">
+                <a id="evn-link" class="nav-link active" href="#">Events</a>
+              </li>
+              <li class="nav-item">
+                <a id="con-link" class="nav-link active" href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
         </div>
     </nav>
     <div id="home_main">
@@ -45,19 +62,21 @@
         </div>
         <img src="assets/svg/chevron-compact-left.svg" class="bi bi-chevron-compact-left movers" alt="">
         <img src="assets/svg/chevron-compact-right.svg" class="bi bi-chevron-compact-right movers" alt="">
+        <div id="indicators-container" style="display: flex; flex-direction: row; justify-content: space-around; width: 100vw;">
         <div class="indicators">
             <div class="prev-indi"></div>
             <div class="curr-indi"></div>
             <div class="next-indi"></div>
         </div>
+        </div>
     </div>
-    <button id="view-all">VIEW ALL</button>
+    <div style="text-align: center;"><button id="view-all">VIEW ALL</button></div>
 </div>
 <div id="contact-us">
     <h2>CONTACT US</h2>
     <h3>Reach out to us</h3>
     <hr>
-    <div class="details">
+    <div id="details">
         <div id="open-hours">
             <div id="op">OPENING HOURS</div>
             <div id="op-details">
@@ -77,7 +96,7 @@
         <div id="support">
             <div id="sup">SUPPORT</div>
             <div id="sup-details">
-                <p>radio@gndec.ac.in</p>
+                <p id="fm_email_id">radio @ gndec.ac.in</p>
                 <p>+91 987654321</p>
                 <p>0161 5085039</p>
             </div>
@@ -85,5 +104,4 @@
     </div>
     <img id="music" src="assets/img/contactus1.png" alt="">
     <img id="call" src="assets/img/contactus2.png" alt="">
-</div>
 </div>
