@@ -86,12 +86,24 @@
     #contact-us h2{
         padding-top: 2.5rem;
     }
+
+    /* Footer */
     footer{
+        padding-top: 2rem;
         grid-template-columns: 1fr 0.4fr
     }
+    footer .member-form{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    /* Programs */
     #programs h3{
         font-size: 2rem;
         padding: 0vw 5vw 2.2vw 5vw;
+    }
+    footer .member-form input{
+        width: 100%;
     }
     /* Events Section */
     #events-view #live-past-search{
@@ -155,17 +167,18 @@
     div#events-view{
         min-height: 100vh;
     }
+    /* Contact Section */
     #contact-us #details{
         grid-template-columns: repeat(1,1fr);
     }
-    #open-hours,#address{
+    #open-hours,#address,#support{
         width: 90vw;
-    }
-    #support{
-        width: 55vw;
     }
     div#contact-us{
         min-height: 100vh;
+    }
+    #contact-us #call, #contact-us #music{
+        visibility: hidden;
     }
 
     /* Footer */
@@ -183,6 +196,35 @@
     footer .member-form button{
         height: 3.5rem;
         padding-left: 2rem;
+        width: 100%;
+    }
+    footer div.tab-links div{
+        padding: 0;
+    }
+    footer div.tab-links div a{
+        font-size: 4.2vw;
+    }
+    footer div.tab-links{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: center;
+    }
+    footer .member-form{
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    #footer-above-member-form{
+        visibility: visible;
+        color: rgb(255, 255, 255);
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .footer-vertical-bars{
+        visibility: visible;
+        color: rgba(255, 255, 255, 0.404);
+        font-size: 4.2vw;
+        line-height: 2rem;
     }
 
     /* Program */
@@ -224,6 +266,7 @@
     #programs #programs-content .program:nth-child(odd) .program-pic{
         float: none;
     }
+    /* Event Section */
     #events-view #events{
         grid-template-columns: repeat(2,1fr);
     }

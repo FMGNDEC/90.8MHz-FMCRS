@@ -426,7 +426,7 @@ footer{
     display: grid;
     grid-template-columns: 0.8fr 1.5fr 1.8fr;
     grid-gap: 1rem;
-    background: rgba(19, 28, 33, 0.99);
+    background: rgba(10, 19, 26, 0.99);
     padding: 3vw;
     padding-top: 4.5rem;
     position: absolute;
@@ -474,7 +474,10 @@ footer div.tab-links div a:hover{
 }
 footer div.tab-links div{
     text-align: center;
-    padding-bottom: 2vw;
+    padding-bottom: 1vw;
+}
+.footer-vertical-bars{
+    visibility: collapse;
 }
 footer .member-form p{
     color: white;
@@ -484,6 +487,10 @@ footer .member-form p{
     font-size: 1.5rem;
     line-height: 2rem;
     padding-bottom: 1.5vw;
+}
+#footer-above-member-form{
+    visibility: hidden;
+    margin: 0;
 }
 footer .member-form input{
     width: 90%;
