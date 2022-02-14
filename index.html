@@ -5,22 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>90.8 MHz FMCRS</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/img/favicon/site.webmanifest">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media_queries.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/media_queries.css">
+
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/ajax-utils.js"></script>
     <script src="js/script.js"></script>
-    <style>
-
-    </style>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     <div id="snippet-adder">
@@ -81,7 +83,7 @@
         <h3 class="sub-heading">We’ve got the most exciting events</h3>
         <hr id="under-events">
         <div class="scene">
-            <div class="carousel">
+            <div class="event-carousel">
                 <div class="carousel-cell"></div>
                 <div class="carousel-cell"></div>
                 <div class="carousel-cell"></div>
@@ -158,11 +160,12 @@
         <div class="member-form">
             <hr id="footer-above-member-form">
             <p>Become a member</p>
-            <input type="email" name="email_id" id="em_id" placeholder="Email Id">
-            <input type="number" name="phone_number" id="ph_no" placeholder="Phone Number">
-            <button>SUBMIT</button>
+            <form action="/" method="post">
+                <input type="email" name="email_id" id="em_id" placeholder="Email Id" required>
+                <input type="number" name="phone_number" id="ph_no" placeholder="Phone Number" required>
+                <button type="submit" id="submit-button">SUBMIT</button>
+            </form>
         </div>
     </footer>
-
 </body>
 </html>
