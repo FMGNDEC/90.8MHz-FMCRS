@@ -1,3 +1,9 @@
+@media screen and (max-width:1199px){
+    /* About Section */
+    .teacher .words{
+        clear: both;
+    }
+}
 @media screen and (max-width:1199px) and (min-width:768px){
     #contact-us #details{
         grid-template-columns: 1fr 1fr;
@@ -64,7 +70,7 @@
     #events-view .heading{
         padding-top: 3.5rem;
     }
-    .carousel{
+    .event-carousel{
         transform: translateZ(-40vw);
     }
     .scene{
@@ -193,7 +199,7 @@
         height: 3.5rem;
         padding-left: 2rem;
     }
-    footer .member-form button{
+    footer .member-form #submit-button{
         height: 3.5rem;
         padding-left: 2rem;
         width: 100%;
@@ -273,5 +279,28 @@
     #events-view #events div p{
         font-size: 1.2rem;
         line-height: 1.5rem;
+    }
+    /* About Section */
+    .teacher .teacher-pic, .teacher .teacher-about{
+        float: none !important;
+        width: 100% !important;
+        padding: 1vw;
+        margin: 0 !important;
+    }
+    .teacher .teacher-pic{
+        width: 80% !important;
+        margin-left: 10% !important;
+    }
+    .teacher .teacher-about .teacher-name{
+        margin-top: 1rem;
+        font-size: 2rem;
+        line-height: 2.3rem;
+    }
+    .teacher .teacher-about .teacher-position{
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+    }
+    .teacher .words{
+        font-size: 1.5rem;
     }
 }

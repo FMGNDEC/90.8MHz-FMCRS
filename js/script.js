@@ -129,10 +129,14 @@ document.addEventListener("DOMContentLoaded",
                                     var event_date = new Date(resJson[i].date+", "+resJson[i].time);
                                     var curr_date = new Date();
                                     if (live_past==="live" && event_date>=curr_date){
-                                        final_html+=insertProperty(event_temp,"eventName",resJson[i].eventName);
+                                        var event_temp_temp = insertProperty(event_temp,"eventName",resJson[i].eventName);
+                                        event_temp_temp = insertProperty(event_temp_temp,"button-start",'');
+                                        final_html+=insertProperty(event_temp_temp,"button-end",'');
                                     }
                                     else if (live_past==="past" && event_date<curr_date){
-                                        final_html+=insertProperty(event_temp,"eventName",resJson[i].eventName);
+                                        var event_temp_temp = insertProperty(event_temp,"eventName",resJson[i].eventName);
+                                        event_temp_temp = insertProperty(event_temp_temp,"buttonStart",'<button style="border: none; margin: 0; padding: 0; background-color: rgba(255, 255, 255, 0);">');
+                                        final_html+=insertProperty(event_temp_temp,"buttonEnd",'</button>');
                                     }
                                 }                            
                             }
@@ -152,7 +156,7 @@ document.addEventListener("DOMContentLoaded",
                                 }
                                 else if (live_past==="past"){
                                     for (var j=0; j<event_list.length; j++){
-                                        event_list[j].addEventListener("click",event_glimpses);
+                                        // event_list[j].addEventListener("click",event_glimpses);
                                     }
                                 }
                             }
@@ -200,8 +204,9 @@ document.addEventListener("DOMContentLoaded",
             false);
         }
         var homeDisplay = function(){
-            $ajaxUtils.sendGetRequest("snippets/snippet_home.html",
+            $ajaxUtils.sendGetRequest("/",
                 function(res){
+                    console.log(res);
                     insertHtml("#snippet-adder",res);
                     define_buttons(true);
                     refixing_navbar();
@@ -351,7 +356,6 @@ document.addEventListener("DOMContentLoaded",
                 viewAllButton.addEventListener("click",eventsDisplay);
             }
         }
-        define_buttons(true);
 
         var define_footer_links = function(){
             document.querySelector("#f-hom-link").addEventListener("click",homeDisplay);
@@ -367,6 +371,22 @@ document.addEventListener("DOMContentLoaded",
             document.querySelector("#f-con-link").removeEventListener("click",contactDisplay);
             document.querySelector("#f-prg-link").removeEventListener("click",programDisplay);
         }
-        
+
+        if (document.querySelector("#glimpses")){
+            defining_links();
+            fixing_navbar();
+            logo_link();
+            document.querySelector("body").style.background="rgba(19, 28, 33, 0.99)";
+            event_link.style.color="rgba(247, 222, 96, 1)";
+            event_link.style["text-decoration-line"]="underline";
+            event_link.style["text-decoration"]="rgba(247, 222, 96, 1) underline !important";
+            event_link.style["text-underline-offset"]="0.8rem";
+            define_footer_links();
+            document.querySelector("#glimpses-back-logo").addEventListener("click",eventsDisplay);
+            document.querySelector("#glimpses-back-button").addEventListener("click",eventsDisplay);
+        }
+        else{
+            define_buttons(true);
+        }
     }
 );
