@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded",
             false);
         }
         var homeDisplay = function(){
-            $ajaxUtils.sendGetRequest("/",
+            $ajaxUtils.sendGetRequest("snippets/snippet_home.html",
                 function(res){
                     console.log(res);
                     insertHtml("#snippet-adder",res);
